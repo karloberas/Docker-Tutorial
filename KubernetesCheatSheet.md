@@ -94,3 +94,19 @@ kubectl describe services/kubernetes-bootcamp
 kubectl rollout status deployments/kubernetes-bootcamp
 ### Roll back to previously working version
 kubectl rollout undo deployments/kubernetes-bootcamp
+
+# Extras
+### Pass config files into Kubernetes
+kubectl create configmap docker-config --from-file=$HOME/.docker/config.json
+### Create pod
+kubectl apply -f pod-kaniko.yml
+### Get pods and watch on it
+kubectl get pods -w
+### Get logs
+kubectl logs kaniko
+### Get component status
+kubectl get cs
+### Get replica set
+kubectl get rs
+### Get api endpoints to send commands to
+kubectl api-versions
