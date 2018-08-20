@@ -112,3 +112,6 @@ eval $(docker-machine env -u)
 docker-machine stop $(docker-machine ls -q)
 ### Delete all VMs and their disk images
 docker-machine rm $(docker-machine ls -q)
+
+### Use busybox to check the content of the volume then remove it from containers
+docker run -it --rm -v test-volume:/vol busybox ls -a /vol
