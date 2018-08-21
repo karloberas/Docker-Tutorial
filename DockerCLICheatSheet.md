@@ -115,3 +115,8 @@ docker-machine rm $(docker-machine ls -q)
 
 ### Use busybox to check the content of the volume then remove it from containers
 docker run -it --rm -v test-volume:/vol busybox ls -a /vol
+
+
+### Save and Load Images
+docker save --output ./build/geek-server.image.tar geek-server
+docker load --input geek-server.image.tar
