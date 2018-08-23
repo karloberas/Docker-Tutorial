@@ -27,23 +27,23 @@ docker container ls
 ### List all containers, even those not running
 docker container ls -a
 ### Gracefully stop the specified container
-docker container stop <hash>
+docker container stop `hash`
 ### Force shutdown of the specified container
-docker container kill <hash>
+docker container kill `hash`
 ### Remove specified container from this machine         
-docker container rm <hash>
+docker container rm `hash`
 ### Remove all containers
 docker container rm $(docker container ls -a -q)
 ### List all images on this machine
 docker image ls -a
 ### Remove specified image from this machine
-docker image rm <image id>
+docker image rm `image id`
 ### Remove all images from this machine
 docker image rm $(docker image ls -a -q)
 ### Log in this CLI session using your Docker credentials
 docker login
-### Tag <image> for upload to registry
-docker tag <image> username/repository:tag
+### Tag `image` for upload to registry
+docker tag `image` username/repository:tag
 ### Upload tagged image to registry
 docker push username/repository:tag
 ### Run image from a registry
@@ -53,17 +53,17 @@ docker run username/repository:tag
 ### List stacks or apps
 docker stack ls
 ### Run the specified Compose file
-docker stack deploy -c <composefile> <appname>
+docker stack deploy -c `composefile` `appname`
 ### List running services associated with an app
 docker service ls
 ### List tasks associated with an app
-docker service ps <service>
+docker service ps `service`
 ### Inspect task or container
-docker inspect <task or container>
+docker inspect `task or container`
 ### List container IDs
 docker container ls -q
 ### Tear down an application                                   
-docker stack rm <appname>
+docker stack rm `appname`
 ### Take down a single node swarm from the manager
 docker swarm leave --force
 
@@ -77,7 +77,7 @@ docker-machine env myvm1
 ### List the nodes in your swarm
 docker-machine ssh myvm1 "docker node ls"
 ### Inspect a node
-docker-machine ssh myvm1 "docker node inspect <node ID>"
+docker-machine ssh myvm1 "docker node inspect `node ID`"
 ### View join token 
 docker-machine ssh myvm1 "docker swarm join-token -q worker"
 ### Open an SSH session with the VM; type "exit" to end
@@ -99,13 +99,13 @@ eval $(docker-machine env myvm1)
 ### Windows command to connect shell to myvm1
 & "C:\Program Files\Docker\Docker\Resources\bin\docker-machine.exe" env myvm1 | Invoke-Expression
 ### Deploy an app; command shell must be set to talk to manager (myvm1), uses local Compose file
-docker stack deploy -c <file> <app>
+docker stack deploy -c `file` `app`
 ### inspect a stack
 docker stack ps getstartedlab
 ### Copy file to node's home dir (only required if you use ssh to connect to manager and deploy the app)
 docker-machine scp docker-compose.yml myvm1:~
 ### Deploy an app using ssh (you must have first copied the Compose file to myvm1)
-docker-machine ssh myvm1 "docker stack deploy -c <file> <app>"
+docker-machine ssh myvm1 "docker stack deploy -c `file` `app`"
 ### Disconnect shell from VMs, use native docker
 eval $(docker-machine env -u)
 ### Stop all running VMs

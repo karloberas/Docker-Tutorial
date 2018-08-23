@@ -110,3 +110,20 @@ kubectl get cs
 kubectl get rs
 ### Get api endpoints to send commands to
 kubectl api-versions
+
+# Udemy
+### Deploy nginx on kubernetes
+kubectl run nginx --image=nginx:1.10.0
+### Expose deployments
+kubectl expose deployments nginx --port 80 --type LoadBalancer
+### Create the pod from configuration file
+kubectl create -f <file>.yaml
+### Map a local port into the port inside the pod
+kubectl port-forward <pod> 10080:80
+### View stream of logs in the pod in real-time
+kubectl logs -f <pod>
+### Run an interactive shell inside the pod
+kubectl exec <pod> --stdin --tty -c <pod> /bin/sh
+### Create secret
+kubectl create secret generic tls-certs --from-file=tls/
+
