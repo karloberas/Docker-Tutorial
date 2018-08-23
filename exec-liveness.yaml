@@ -1,0 +1,23 @@
+# Single container pod
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    test: liveness
+  name: liveness-exec
+spec:
+  containers:
+  - name: liveness
+    image: k8s.gcr.io/busybox
+    args: # Remove /tmp/healthy after 30 seconds
+    - /bin/sh
+    - -c
+    - touch /tmp/healthy; sleep 30; rm -rf /tmp/healthy; sleep 600
+    livenessProbe:
+      exec:
+        command: # Execute command to probe liveness, returns 0 if alive and healthy, otherwise kill and restart it
+        - cat
+        - /tmp/healthy
+      initialDelaySeconds: 5 # Wait 5s before performing first probe
+      periodSeconds: 5 # Pod should perform liveness check every 5s
+
