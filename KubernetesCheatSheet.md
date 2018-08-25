@@ -60,6 +60,8 @@ kubectl describe deployment
 kubectl get pods -l run=kubernetes-bootcamp
 ### List current services with pod label
 kubectl get services -l run=kubernetes-bootcamp
+### Get pod label
+kubectl describe pods `pod` | grep Labels
 ### Apply a new label to the pod after exporting the pod name to the environment variable
 kubectl label pod $POD_NAME app=v1
 ### Check the label of the pod
@@ -68,6 +70,8 @@ kubectl describe pods $POD_NAME
 kubectl delete service -l run=kubernetes-bootcamp
 ### Curl inside the pod to check if the app is still running
 kubectl exec -ti $POD_NAME localhost:8080
+### Get endpoint of the service
+kubectl describe services monolith | grep Endpoints 
 
 # Part 5 Scaling your app
 ### List deployments and see DESIRED (configured number of replicas), CURRENT (how many replicas are running now), UP-TO-DATE (number of replicas that were updated to match the desired state), AVAILABLE (how many replicas are currently available to the users)
@@ -118,14 +122,28 @@ kubectl run nginx --image=nginx:1.10.0
 kubectl expose deployments nginx --port 80 --type LoadBalancer
 ### Create the pod from configuration file
 kubectl create -f `file`.yaml
-### Map a local port into the port inside the pod
+### Map a local port into the port inside the pod (only for testing, pods in production should only be exposed using services)
 kubectl port-forward `pod` 10080:80
 ### View stream of logs in the pod in real-time
 kubectl logs -f `pod`
 ### Run an interactive shell inside the pod
 kubectl exec `pod` --stdin --tty -c `pod` /bin/sh
+
 ### Create secret
-kubectl create secret generic tls-certs --from-file=tls/
+kubectl create secret generic  s --from-file=tls/
+### View secret
+kubectl describe secrets 
+### Create configmap
+kubectl create configmap nginx-proxy-conf --from-file nginx/proxy.conf
+### View configmap
+kubectl describe configmap nginx-proxy-conf
+
+# Communicate with a set of pods
+## Services - persistent endpoints for pods; use labels to select pods
+## Services Type
+- Cluster IP (internal only)
+- NodePort (gives each node an external ip that can be accessible)
+- Load balancer (adds a load balancer from the cloud provider that reports traffic from the service to the nodes within it )
 
 
 ## For more info
