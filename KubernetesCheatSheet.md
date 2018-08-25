@@ -145,6 +145,17 @@ kubectl describe configmap nginx-proxy-conf
 - NodePort (gives each node an external ip that can be accessible)
 - Load balancer (adds a load balancer from the cloud provider that reports traffic from the service to the nodes within it )
 
+# Deploy services as a deployments (each deployment handles one replica set)
+### Create deployment
+kubectl create -f deployments/auth.yaml
+### View deployment
+kubectl describe deployment auth
+### Create service
+kubectl create -f services/auth.yaml
+### View current set of replicas
+kubectl get replicasets
+### Apply change to the replica set of a deployment
+kubectl apply -f deployments/auth.yaml
 
 ## For more info
 https://kubernetes.io/docs/reference/kubectl/cheatsheet/#deleting-resources
