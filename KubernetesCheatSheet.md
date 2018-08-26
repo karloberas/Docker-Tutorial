@@ -156,6 +156,18 @@ kubectl create -f services/auth.yaml
 kubectl get replicasets
 ### Apply change to the replica set of a deployment
 kubectl apply -f deployments/auth.yaml
+### Check deployment pods by label
+kubectl get pods -l `label`
+### Delete deployment by name
+kubectl delete deployment `deployment name`
+
+# UI
+### Deploy the Kubernetes UI
+kubectl create -f https://raw.githubusercontent.com/kubernetes/dashboard/master/src/deploy/recommended/kubernetes-dashboard.yaml
+### Open the UI pod for access
+kubectl proxy
+### Kubectl will handle authentication with apiserver and make Dashboard available at
+http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
 
 ## For more info
-https://kubernetes.io/docs/reference/kubectl/cheatsheet/#deleting-resources
+https://kubernetes.io/docs/reference/kubectl/cheatsheet/
